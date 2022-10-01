@@ -4,6 +4,8 @@ package com.quiz.entity;
 import com.sun.istack.NotNull;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Question extends DistributedEntity {
@@ -14,6 +16,8 @@ public class Question extends DistributedEntity {
     private String answer;
 
         private QuestionLevel questionLevel;
+    @ManyToOne
+    private User user;
 
     public String getTitle() {
         return title;
@@ -37,5 +41,13 @@ public class Question extends DistributedEntity {
 
     public void setQuestionLevel(QuestionLevel questionLevel) {
         this.questionLevel = questionLevel;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

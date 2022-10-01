@@ -27,7 +27,7 @@ import java.util.Set;
         @Column(nullable = false, unique = true)
         private String number;
 
-        private Boolean active;
+
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role",
@@ -35,6 +35,7 @@ import java.util.Set;
     @Column(name = "role_id")
     private Set<Role> roles;
 
+    private Boolean active;
     public String getName() {
         return name;
     }
@@ -90,4 +91,5 @@ import java.util.Set;
     public void setActive(Boolean active) {
         this.active = active;
     }
+
 }

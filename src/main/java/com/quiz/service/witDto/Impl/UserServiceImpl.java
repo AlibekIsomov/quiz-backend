@@ -1,6 +1,5 @@
 package com.quiz.service.witDto.Impl;
 
-
 import com.quiz.converter.AbstractDTOConverter;
 import com.quiz.dto.UserDTO;
 import com.quiz.entity.Role;
@@ -22,10 +21,10 @@ import java.util.Set;
 
 
 @Service
-public class UserServiceImpl extends AbstractDTOService<User, UserDTO> implements UserService {
+public class UserServiceImpl extends AbstractDTOService<User,UserDTO> implements UserService {
 
     @Autowired
-    userRepository userRepository;
+   userRepository userRepository;
 
     @Autowired
     PasswordEncoder encoder;
@@ -76,13 +75,12 @@ public class UserServiceImpl extends AbstractDTOService<User, UserDTO> implement
 
         try{
             Long n=Long.parseLong(key);
-            return userRepository.findAllByIdOrNameContainsIgnoreCaseOrSurnameContainsIgnoreCaseOrUsernameContainsIgnoreCaseOrEmailContainsIgnoreCase(n,key,key,key,key, pageable);
+            return userRepository.findAllByIdOrNameContainsIgnoreCaseOrSurnameContainsIgnoreCaseOrUsernameContainsIgnoreCaseOrNumberContainsIgnoreCase(n,key,key,key,key, pageable);
         }
         catch (Exception x) {
-            return userRepository.findAllByIdOrNameContainsIgnoreCaseOrSurnameContainsIgnoreCaseOrUsernameContainsIgnoreCaseOrEmailContainsIgnoreCase((long)-1,key,key,key, key, pageable);
+            return userRepository.findAllByIdOrNameContainsIgnoreCaseOrSurnameContainsIgnoreCaseOrUsernameContainsIgnoreCaseOrNumberContainsIgnoreCase((long)-1,key,key,key, key, pageable);
         }
     }
-
 
     @Override
     public void someChangesForCreate(User entity) {

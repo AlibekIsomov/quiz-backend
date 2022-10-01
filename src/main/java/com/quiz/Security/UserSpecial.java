@@ -3,6 +3,7 @@ package com.quiz.Security;
 
 
 
+
 import com.quiz.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,19 +25,18 @@ public class UserSpecial implements UserDetails {
     public UserSpecial(User user){
         this.username = user.getUsername();
         this.password = user.getPassword();
+
         this.roles =
                 user.getRoles()
                         .stream()
                         .map(l->new SimpleGrantedAuthority(l.name()))
                         .collect(Collectors.toSet());
         this.active = user.getActive();
-
     }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return roles;
     }
 
     @Override
@@ -66,7 +66,7 @@ public class UserSpecial implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return active;
     }
 
 
