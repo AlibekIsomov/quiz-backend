@@ -33,7 +33,8 @@ public class QuizBackendApplication {
 			u.setUsername("admin123");
 			u.setPassword(passwordEncoder.encode("admin123"));
 			u.setActive(true);
-			u.setRoles(Set.of(Role.ADMIN, Role.USER));
+			u.setRoles(Set.of(Role.ADMIN,
+					Role.USER));
 			userRepository.save(u);
 
 
