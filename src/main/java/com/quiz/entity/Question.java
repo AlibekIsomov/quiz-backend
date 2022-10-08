@@ -15,7 +15,7 @@ public class Question extends DistributedEntity {
     @NotNull
     private String answer;
 
-        private QuestionLevel questionLevel;
+    private QuestionLevel questionLevel;
     @ManyToOne
     private User user;
 

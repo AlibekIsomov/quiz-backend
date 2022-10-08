@@ -24,7 +24,7 @@ import java.util.Set;
         @Column(nullable = false)
         private String password;
 
-        @Column(nullable = false, unique = true)
+        @Column(unique = true)
         private String number;
 
 
