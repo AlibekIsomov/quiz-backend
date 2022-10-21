@@ -5,7 +5,7 @@ public class UserVM {
     private String username;
     private String oldPassword;
     private String newPassword;
-    private  String confirm;
+    private String confirm;
 
     public String getConfirm() {
         return confirm;

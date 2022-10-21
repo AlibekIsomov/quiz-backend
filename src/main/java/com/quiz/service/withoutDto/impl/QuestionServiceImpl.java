@@ -14,6 +14,7 @@ public class QuestionServiceImpl extends AbstractService<Question> implements Qu
 
     @Autowired
     QuestionRepository questionRepository;
+
     public QuestionServiceImpl(DistributedRepository<Question> repository) {
         super(repository);
     }
@@ -30,6 +31,12 @@ public class QuestionServiceImpl extends AbstractService<Question> implements Qu
 
     @Override
     public Page<Question> search(String key, Pageable pageable) {
-        return null;
+        try {
+            Long n = Long.parseLong(key);
+            return questionRepository.findAllByTitleContainingIgnoreCaseOrQuestionLevel(n, key, key, pageable);
+        } catch (Exception x) {
+            return questionRepository.findAllByTitleContainingIgnoreCaseOrQuestionLevel((long) -1, key, key, pageable);
+        }
+
     }
 }

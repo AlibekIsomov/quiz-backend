@@ -23,12 +23,6 @@ public class ExamServiceImpl extends AbstractService<Exam> implements ExamServic
         super(repository);
     }
 
-
-    @Override
-    public Page<Exam> search(String key, Pageable pageable) {
-        return null;
-    }
-
     @Override
     public void someChangesForCreate(Exam entity) {
 
@@ -38,4 +32,18 @@ public class ExamServiceImpl extends AbstractService<Exam> implements ExamServic
     public void someChangesForUpdate(Exam entity) {
 
     }
+
+    @Override
+    public Page<Exam> search(String key, Pageable pageable) {
+        try{
+            Long n=Long.parseLong(key);
+            return examRepository.findAllByOverallContainingIgnoreCase(n, Long.valueOf(key),  pageable);
+        }
+        catch (Exception x) {
+            return examRepository.findAllByOverallContainingIgnoreCase((long)-1, Long.valueOf(key), pageable);
+        }
+    }
+
+
+
 }

@@ -65,7 +65,7 @@ public class JwtTokenUtil implements Serializable {
             System.out.println("Noto'g'ri");
             throw new BadCredentialsException("INVALID_CREDENTIALS", ex);
         } catch (ExpiredJwtException ex) {
-//           throw new ExpiredJwtException(header, claims, "Token has Expired", ex);
+//            throw new ExpiredJwtException(header, claims, "Token has Expired", ex);
             System.out.println("Muddat eskirgan");
             return false;
         }

@@ -1,6 +1,7 @@
 package com.quiz.dto;
 
 
+import com.quiz.dto.BaseDTO;
 import com.quiz.entity.Role;
 import com.quiz.entity.User;
 
@@ -14,29 +15,19 @@ public class UserDTO extends BaseDTO {
     private String email;
     private Set<Role> roles;
     private Boolean active;
-    private String number;
-
-
 
     public UserDTO() {
 
     }
 
-
-
     public UserDTO(User user) {
-
         this.name = user.getName();
         this.surname = user.getSurname();
         this.username = user.getUsername();
-        this.roles = user.getRoles();
-        this.active = user.getActive();
-        this.number = user.getNumber();
+        this.email = user.getEmail();
         this.roles = user.getRoles();
         this.active = user.getActive();
     }
-
-
 
     public String getName() {
         return name;
@@ -84,13 +75,5 @@ public class UserDTO extends BaseDTO {
 
     public void setActive(Boolean active) {
         this.active = active;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
     }
 }

@@ -20,7 +20,7 @@ import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class    SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Autowired
@@ -50,14 +50,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/account/authenticate").permitAll()
                 .antMatchers("/api/account/register").permitAll()
+                .antMatchers("/api/question").hasAnyAuthority("ADMIN","MANAGER")
+                .antMatchers("/api/exam").hasAnyAuthority("ADMIN","MANAGER")
                 .antMatchers("/api/user").hasAnyAuthority("ADMIN")
-                .antMatchers("/api/user/**").authenticated()
-                .antMatchers("/api/account/**").authenticated()
                 .anyRequest().authenticated()
                 .and().exceptionHandling()
                 .and()
                 .sessionManagement()
-               .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilterBefore(jwtFilter,
                 UsernamePasswordAuthenticationFilter.class);
@@ -66,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
 
-        web.ignoring()
+        web   .ignoring()
                 .antMatchers(HttpMethod.OPTIONS, "/**")
                 .antMatchers("/app/**/*.{js,html}")
                 .antMatchers("/i18n/**")

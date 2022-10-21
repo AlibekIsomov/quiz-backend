@@ -3,7 +3,6 @@ package com.quiz.Security;
 
 
 
-
 import com.quiz.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

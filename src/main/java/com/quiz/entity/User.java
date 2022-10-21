@@ -1,33 +1,32 @@
 package com.quiz.entity;
 
+import com.quiz.entity.DistributedEntity;
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
-
 @Entity
-    @Table(name = "users")
-    public class User extends DistributedEntity {
-
-        @Column(nullable = false)
-        private String name;
-
-        @Column(nullable = false)
-        private String surname;
-
-        @Size(max = 30, min = 6)
-        @Column(unique = true, nullable = false)
-        private String username;
-
-        @Size(max = 60, min = 60)
-        @Column(nullable = false)
-        private String password;
-
-        @Column(unique = true)
-        private String number;
+@Table(name = "users")
+public class User extends DistributedEntity {
 
 
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private String surname;
+
+    @Size(max = 30, min = 6)
+    @Column(unique = true, nullable = false)
+    private String username;
+
+    @Size(max = 60, min = 60)
+    @Column(nullable = false)
+    private String password;
+
+    private String email;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role",
@@ -36,6 +35,7 @@ import java.util.Set;
     private Set<Role> roles;
 
     private Boolean active;
+
     public String getName() {
         return name;
     }
@@ -68,12 +68,12 @@ import java.util.Set;
         this.password = password;
     }
 
-    public String getNumber() {
-        return number;
+    public String getEmail() {
+        return email;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Set<Role> getRoles() {
@@ -91,5 +91,5 @@ import java.util.Set;
     public void setActive(Boolean active) {
         this.active = active;
     }
-
 }
+
