@@ -5,7 +5,7 @@ import com.quiz.dto.UserDTO;
 import com.quiz.entity.Role;
 import com.quiz.entity.User;
 import com.quiz.repository.DistributedRepository;
-import com.quiz.repository.userRepository;
+import com.quiz.repository.UserRepository;
 import com.quiz.service.witDto.UserService;
 import com.quiz.vm.UserVM;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +16,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.Set;
-
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl extends AbstractDTOService<User,UserDTO> implements UserService {
+public class UserServiceImpl extends AbstractDTOService<User, UserDTO> implements UserService {
 
     @Autowired
-   userRepository userRepository;
+    UserRepository userRepository;
 
     @Autowired
     PasswordEncoder encoder;
@@ -75,17 +74,17 @@ public class UserServiceImpl extends AbstractDTOService<User,UserDTO> implements
 
         try{
             Long n=Long.parseLong(key);
-            return userRepository.findAllByIdOrNameContainsIgnoreCaseOrSurnameContainsIgnoreCaseOrUsernameContainsIgnoreCaseOrNumberContainsIgnoreCase(n,key,key,key,key, pageable);
+            return userRepository.findAllByIdOrNameContainsIgnoreCaseOrSurnameContainsIgnoreCaseOrUsernameContainsIgnoreCaseOrEmailContainsIgnoreCase(n,key,key,key,key,pageable);
         }
         catch (Exception x) {
-            return userRepository.findAllByIdOrNameContainsIgnoreCaseOrSurnameContainsIgnoreCaseOrUsernameContainsIgnoreCaseOrNumberContainsIgnoreCase((long)-1,key,key,key, key, pageable);
+            return userRepository.findAllByIdOrNameContainsIgnoreCaseOrSurnameContainsIgnoreCaseOrUsernameContainsIgnoreCaseOrEmailContainsIgnoreCase((long)-1,key,key,key,key, pageable);
         }
     }
 
     @Override
     public void someChangesForCreate(User entity) {
         entity.setPassword(encoder.encode(entity.getPassword()));
-        entity.setRoles(Set.of(Role.USER));
+        entity.setRoles(Set.of( Role.USER));
         entity.setActive(true);
     }
 

@@ -2,7 +2,7 @@ package com.quiz;
 
 import com.quiz.entity.Role;
 import com.quiz.entity.User;
-import com.quiz.repository.userRepository;
+import com.quiz.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -17,7 +17,7 @@ import java.util.Set;
 public class QuizBackendApplication implements ApplicationRunner {
 
 	@Autowired
-	userRepository userRepository;
+    UserRepository userRepository;
 
 	@Autowired
 	PasswordEncoder passwordEncoder;

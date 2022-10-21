@@ -7,6 +7,7 @@ import com.quiz.Security.UserProvider;
 import com.quiz.Security.UserSpecial;
 import com.quiz.dto.UserDTO;
 import com.quiz.entity.User;
+import com.quiz.repository.UserRepository;
 import com.quiz.service.witDto.UserService;
 import com.quiz.vm.UserVM;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,8 @@ public class AccountController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -66,7 +69,6 @@ public class AccountController {
     public ResponseEntity<UserDTO> getCurrentUser(){
         return ResponseEntity.ok(userService.getCurrentUser());
     }
-
 
 
     @PutMapping("/password")
