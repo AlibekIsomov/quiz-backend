@@ -1,5 +1,6 @@
 package com.quiz.service.withoutDto.impl;
 
+
 import com.quiz.entity.DistributedEntity;
 import com.quiz.repository.DistributedRepository;
 import com.quiz.service.withoutDto.CommonService;

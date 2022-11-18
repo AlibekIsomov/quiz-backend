@@ -2,6 +2,7 @@ package com.quiz.dto;
 
 
 import com.quiz.dto.BaseDTO;
+import com.quiz.entity.Question;
 import com.quiz.entity.Role;
 import com.quiz.entity.User;
 
@@ -27,6 +28,9 @@ public class UserDTO extends BaseDTO {
         this.email = user.getEmail();
         this.roles = user.getRoles();
         this.active = user.getActive();
+    }
+
+    public UserDTO(Question entity) {
     }
 
     public String getName() {
