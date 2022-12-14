@@ -1,2 +1,6 @@
-package com.quiz.service.withoutDto;public interface BlogService {
+package com.quiz.service.withoutDto;
+
+import com.quiz.entity.Blog;
+
+public interface BlogService extends CommonService<Blog>{
 }

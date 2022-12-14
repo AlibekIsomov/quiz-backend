@@ -1,6 +1,7 @@
-package net.idrok.tester.service;
+package com.quiz.service.withoutDto;
 
-import net.idrok.tester.entity.Fayl;
 
-public interface FaylService extends CommonService<Fayl>{
+import com.quiz.entity.Fayl;
+
+public interface FaylService extends CommonFService<Fayl>{
 }

@@ -1,8 +1,9 @@
-package net.idrok.tester.service.impl;
+package com.quiz.service.withoutDto.impl;
 
-import net.idrok.tester.entity.Fayl;
-import net.idrok.tester.repository.FaylRepository;
-import net.idrok.tester.service.FaylService;
+
+import com.quiz.entity.Fayl;
+import com.quiz.repository.FaylRepository;
+import com.quiz.service.withoutDto.FaylService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

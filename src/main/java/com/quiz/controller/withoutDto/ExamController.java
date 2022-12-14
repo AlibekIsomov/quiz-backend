@@ -7,6 +7,7 @@ import com.quiz.service.withoutDto.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,4 +25,14 @@ public class ExamController extends AbstractController<Exam> {
     public ResponseEntity<?> search(@PathVariable String key, Pageable pageable){
         return ResponseEntity.ok(examService.search(key, pageable));
 }
+    @GetMapping("/all")
+    public ResponseEntity<?> getAll(Pageable pageable){
+        return ResponseEntity.ok(examService.getAll(pageable));
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id){
+        return ResponseEntity.ok(examService.getById(id));
+
+    }
 }

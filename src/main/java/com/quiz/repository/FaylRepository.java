@@ -1,6 +1,6 @@
-package net.idrok.tester.repository;
+package com.quiz.repository;
 
-import net.idrok.tester.entity.Fayl;
+import com.quiz.entity.Fayl;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

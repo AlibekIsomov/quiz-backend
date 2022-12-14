@@ -53,7 +53,25 @@ public class    SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/xa").permitAll()
                 .antMatchers("/api/question").hasAnyAuthority("ADMIN","MANAGER")
                 .antMatchers("/api/exam").hasAnyAuthority("ADMIN","MANAGER")
+                .antMatchers("/api/blog").hasAnyAuthority("ADMIN","MANAGER")
                 .antMatchers("/api/user").hasAnyAuthority("ADMIN")
+
+                .antMatchers("/api/question/all").permitAll()
+                .antMatchers("/api/question/get/{id}").permitAll()
+
+                .antMatchers("/api/questions/all").permitAll()
+                .antMatchers("/api/questions/get/{id}").permitAll()
+
+                .antMatchers("/api/exam/all").permitAll()
+                .antMatchers("/api/exam/get/{id}").permitAll()
+
+                .antMatchers("/api/user/all").permitAll()
+                .antMatchers("/api/user/get/{id}").permitAll()
+
+                .antMatchers("/api/blog/all").permitAll()
+                .antMatchers("/api/blog/get/{id}").permitAll()
+
+
                 .anyRequest().authenticated()
                 .and().exceptionHandling()
                 .and()

@@ -25,7 +25,15 @@ public class QuestionController extends AbstractController<Question>   {
     @RequestMapping("/search/{key}")
     public ResponseEntity<?> search(@PathVariable String key, Pageable pageable) {
         return ResponseEntity.ok(questionService.search(key, pageable));
+    }
+    @GetMapping("/all")
+    public ResponseEntity<?> getAll(Pageable pageable){
+        return ResponseEntity.ok(questionService.getAll(pageable));
+    }
 
+    @GetMapping("/get/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id){
+        return ResponseEntity.ok(questionService.getById(id));
 
     }
 }
