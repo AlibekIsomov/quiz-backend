@@ -30,7 +30,7 @@ public abstract class AbstractController<ENTITY extends DistributedEntity>{
         return new ResponseEntity<>(service.update(entity), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/get/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id){
         if(service.delete(id)){
             return ResponseEntity.noContent().build();
