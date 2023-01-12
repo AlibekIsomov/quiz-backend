@@ -26,5 +26,14 @@ public class UserController extends AbstractDTOController<User, UserDTO> {
     public ResponseEntity<?> search(@PathVariable String key, Pageable pageable){
         return ResponseEntity.ok(userService.search(key,pageable));
     }
+    @GetMapping("/all")
+    public ResponseEntity<?> getAll(Pageable pageable) {
+        return ResponseEntity.ok(userService.getAll(pageable));
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id){
+        return ResponseEntity.ok(userService.getById(id));
+    }
 
 }
