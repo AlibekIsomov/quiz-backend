@@ -35,6 +35,8 @@ public class User extends DistributedEntity {
     private Set<Role> roles;
 
     private Boolean active;
+    @OneToOne
+    private Overall overall;
 
     public String getName() {
         return name;
@@ -90,6 +92,14 @@ public class User extends DistributedEntity {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public Overall getOverall() {
+        return overall;
+    }
+
+    public void setOverall(Overall overall) {
+        this.overall = overall;
     }
 }
 

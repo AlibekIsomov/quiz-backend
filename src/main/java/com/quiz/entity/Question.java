@@ -2,6 +2,7 @@ package com.quiz.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.quiz.service.withoutDto.OverAllService;
 import com.sun.istack.NotNull;
 
 import javax.persistence.Entity;
@@ -19,6 +20,8 @@ public class Question extends DistributedEntity {
 
     @ManyToOne
     private QuestionLevel questionLevel;
+    @ManyToOne
+    private Overall overAll;
 
     @ManyToOne
     private User user;
@@ -53,5 +56,13 @@ public class Question extends DistributedEntity {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Overall getOverAll() {
+        return overAll;
+    }
+
+    public void setOverAll(Overall overAll) {
+        this.overAll = overAll;
     }
 }

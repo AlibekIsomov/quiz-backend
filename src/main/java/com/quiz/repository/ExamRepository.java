@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ExamRepository extends DistributedRepository<Exam> {
-    public Page<Exam> findAllByOverallContainingIgnoreCase(Long id, Long overall, Pageable pageable );
+
 }

@@ -13,8 +13,7 @@ public class Exam extends DistributedEntity{
 
     @NotNull
     private Long numberOf;
-    @NotNull
-    private Long overall;
+
 
 
     @ManyToOne
@@ -41,11 +40,5 @@ public class Exam extends DistributedEntity{
         this.numberOf = numberOf;
     }
 
-    public Long getOverall() {
-        return overall;
-    }
 
-    public void setOverall(Long overall) {
-        this.overall = overall;
-    }
 }

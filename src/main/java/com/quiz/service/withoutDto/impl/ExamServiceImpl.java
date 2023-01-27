@@ -37,10 +37,10 @@ public class ExamServiceImpl extends AbstractService<Exam> implements ExamServic
     public Page<Exam> search(String key, Pageable pageable) {
         try{
             Long n=Long.parseLong(key);
-            return examRepository.findAllByOverallContainingIgnoreCase(n , Long.valueOf(key),  pageable);
+            return examRepository.findAllByOrderByIdDesc( pageable);
         }
         catch (Exception x) {
-            return examRepository.findAllByOverallContainingIgnoreCase((long)-1, Long.valueOf(key), pageable);
+            return examRepository.findAllByOrderByIdDesc( pageable);
         }
     }
 
