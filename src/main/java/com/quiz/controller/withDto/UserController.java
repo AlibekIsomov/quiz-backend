@@ -36,4 +36,6 @@ public class UserController extends AbstractDTOController<User, UserDTO> {
         return ResponseEntity.ok(userService.getById(id));
     }
 
+   
+
 }

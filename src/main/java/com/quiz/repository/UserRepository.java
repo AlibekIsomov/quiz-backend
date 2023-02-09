@@ -19,5 +19,7 @@ public interface UserRepository extends DistributedRepository<User>{
 
     Optional<User> findByUsername(String username);
 
+    
+
     List<User> findAllByRolesContains(Role role);
 }

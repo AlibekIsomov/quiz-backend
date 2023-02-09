@@ -20,7 +20,7 @@ public class QuizBackendApplication implements ApplicationRunner {
     UserRepository userRepository;
 
 	@Autowired
-	PasswordEncoder passwordEncoder;
+	PasswordEncoder passwordEncoder;	
 
 	public static void main(String[] args) {
 		SpringApplication.run(QuizBackendApplication.class, args);
@@ -30,7 +30,7 @@ public class QuizBackendApplication implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 		Optional<User> uk = userRepository.findByUsername("admin123");
 		if(!uk.isPresent()){
-			User u = new User();
+			User u = new User();	
 			u.setName("admin");
 			u.setSurname("Admin");
 			u.setUsername("admin123");

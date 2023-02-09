@@ -65,7 +65,7 @@ public class AccountController {
         return ResponseEntity.ok(userService.create(user));
     }
 
-    @GetMapping()
+    @GetMapping("/current-user")
     public ResponseEntity<UserDTO> getCurrentUser(){
         return ResponseEntity.ok(userService.getCurrentUser());
     }

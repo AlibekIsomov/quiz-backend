@@ -28,5 +28,6 @@ public interface UserService extends CommonServiceDto<User,UserDTO>{
     UserDTO getCurrentUser();
 
     Optional<User> getByUsername(String login);
+    
     public Page<User> search(String key, Pageable pageable);
 }
