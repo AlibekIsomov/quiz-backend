@@ -14,6 +14,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -35,7 +36,7 @@ public class Overall extends DistributedEntity {
    @DateTimeFormat(pattern = "yyyy.MM.dd.HH.mm")
    @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
-    private Date date;
+    private LocalDate date;
     private String username;
     @ManyToOne
     private QuestionLevel questionLevel;

@@ -5,13 +5,14 @@ import com.quiz.entity.QuestionLevel;
 
 import javax.naming.Name;
 import javax.persistence.ManyToOne;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class OverallDTO extends BaseDTO{
     private int score;
     private String point;
     private int attemptedQuestions;
-    private Date date;
+    private LocalDate date;
     private String username;
     private String name;
     private String surname;
@@ -55,11 +56,11 @@ public class OverallDTO extends BaseDTO{
         this.attemptedQuestions = attemptedQuestions;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

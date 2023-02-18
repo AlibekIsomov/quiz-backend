@@ -11,6 +11,8 @@ import com.quiz.repository.UserRepository;
 import com.quiz.service.witDto.Impl.UserServiceImpl;
 import com.quiz.service.withoutDto.OverAllService;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -45,17 +47,11 @@ public class OverallServiceImpl  extends AbstractService<Overall> implements Ove
 
 	@Override
 	public Overall addOverallWithUser(Overall overall){
+		overall.setDate(LocalDate.now());
+		overall.setCreated(LocalDateTime.now());
+		overall.setModified(LocalDateTime.now());
 		overall.setUser(userRepository.findByUsername(userServiceImpl.getCurrentUser().getUsername()).get());
 		return overallRepository.save(overall);
-	}
-
-
-
-
-    //Davron
-	@Override
-	public Overall addOverall(Overall overall) {
-		return this.overallRepository.save(overall);
 	}
 
 	@Override
@@ -84,20 +80,10 @@ public class OverallServiceImpl  extends AbstractService<Overall> implements Ove
 	}
 
 	@Override
-	public Overall getOverall(Long overallId) {
-		return this.overallRepository.findById(overallId).get();
-	}
-
-	@Override
 	public Page<OverallDTO> getAllDTO(Pageable pageable) {
 		Page<Overall> overalls = overallRepository.findAll(pageable);
 		Page<OverallDTO> overallDTOPage = overalls.map(OverallDTO::new);
 		return overallDTOPage;
-	}
-
-	@Override
-	public void deleteOverall(Long overallId) {
-		this.overallRepository.deleteById(overallId);
 	}
 
 	@Override
@@ -109,6 +95,5 @@ public class OverallServiceImpl  extends AbstractService<Overall> implements Ove
 	public Set<Overall> getOverallsOfQuestionLevel(QuestionLevel questionLevel) {
 		return new HashSet<>(this.overallRepository.findByQuestionLevel(questionLevel));
 	}
-    
 
 }
