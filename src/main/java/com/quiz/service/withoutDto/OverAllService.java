@@ -2,35 +2,23 @@ package com.quiz.service.withoutDto;
 
 import java.util.Set;
 
+import com.quiz.dto.OverallDTO;
 import com.quiz.entity.Overall;
 import com.quiz.entity.QuestionLevel;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface OverAllService extends CommonService<Overall>{
 
-    // public Overall addOverall(Overall result);
-	
-	// public Overall updateOverall(Overall result);
-	
-	// public Set<Overall> getOveralls();
-	
-	
-	// public Overall getOverall(Long resultId);
-	
-	// public void deleteOverall(Long resultId);
 
-
-    // public Set<Overall> getOverallsOfUser(String username);
-	
-	// public Set<Overall> getOverallsOfQuestionLevel(QuestionLevel questionLevel);
-	public Overall addOverall(Overall overall);
 	
 	public Overall updateOverall(Overall overall);
-	
+	public Overall addOverallWithUser(Overall overall);
 	public Set<Overall> getOveralls();
-	
-	public Overall getOverall(Long overallId);
-	
-	public void deleteOverall(Long overallId);
+	public OverallDTO getOverallDTO(Long id);
+
+
+	public Page<OverallDTO> getAllDTO(Pageable pageable);
 	
 	public Set<Overall> getOverallsOfUser(String username);
 	

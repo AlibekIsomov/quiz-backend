@@ -2,8 +2,12 @@ package com.quiz.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.quiz.service.withoutDto.OverAllService;
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -11,6 +15,10 @@ import javax.persistence.OneToMany;
 import java.util.Set;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
+@Data
 public class Question extends DistributedEntity {
     @NotNull
     private String title;
@@ -20,49 +28,8 @@ public class Question extends DistributedEntity {
 
     @ManyToOne
     private QuestionLevel questionLevel;
-    @ManyToOne
-    private Overall overAll;
 
-    @ManyToOne
-    private User user;
 
-    public String getTitle() {
-        return title;
-    }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
-
-    public QuestionLevel getQuestionLevel() {
-        return questionLevel;
-    }
-
-    public void setQuestionLevel(QuestionLevel questionLevel) {
-        this.questionLevel = questionLevel;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Overall getOverAll() {
-        return overAll;
-    }
-
-    public void setOverAll(Overall overAll) {
-        this.overAll = overAll;
-    }
 }

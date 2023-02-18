@@ -29,9 +29,9 @@ public class OverallController extends AbstractController<Overall> {
     }
 
    // add overall
-	@PostMapping("/")
+	@PostMapping("/save")
 	public ResponseEntity<Overall> add(@RequestBody Overall overall){
-		return ResponseEntity.ok(this.overAllService.addOverall(overall));	
+		return ResponseEntity.ok(this.overAllService.addOverallWithUser(overall));
 	}
 	
 	// update overall
@@ -43,7 +43,7 @@ public class OverallController extends AbstractController<Overall> {
 	// get all overalls
 	@GetMapping("/all")
     public ResponseEntity<?> getAll(Pageable pageable){
-        return ResponseEntity.ok(overAllService.getAll(pageable));
+        return ResponseEntity.ok(overAllService.getAllDTO(pageable));
     }
 
 	// get one overall
@@ -52,28 +52,4 @@ public class OverallController extends AbstractController<Overall> {
         return ResponseEntity.ok(overAllService.getById(id));
 
     }
-	
-	
-	// delete overall
-	// @DeleteMapping("/get/{aId}")
-	// public void delete(@PathVariable("aId") Long aId) {
-	// 	this.overAllService.deleteOverall(aId);
-	// }
-	
-	// get overalls of quiz
-	@GetMapping("/level/get/{qId}")
-	public ResponseEntity<?> getOverallsOfQuestionLevel(@PathVariable("qId") Long qId){
-		QuestionLevel questionLevel = new QuestionLevel();
-		questionLevel.setId(qId);
-		return ResponseEntity.ok(this.overAllService.getOverallsOfQuestionLevel(questionLevel));
-	}
-	
-	// get overalls of user
-	@GetMapping("/user/get/{username}")
-	public ResponseEntity<?> getoverallsofUser(@PathVariable("username") String username){
-//		User user = new User();
-//		user.setUsername(username);
-		return ResponseEntity.ok(this.overAllService.getOverallsOfUser(username));
-	}
-
 }

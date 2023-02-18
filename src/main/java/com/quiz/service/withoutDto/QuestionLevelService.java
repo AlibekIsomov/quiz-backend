@@ -1,6 +1,5 @@
 package com.quiz.service.withoutDto;
 
-import com.quiz.entity.Exam;
 import com.quiz.entity.QuestionLevel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

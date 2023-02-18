@@ -1,81 +1,48 @@
 package com.quiz.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
+@Data
 public class Overall extends DistributedEntity {
-    private int Score;
+    private int score;
     private String point;
     private int attemptedQuestions;
+    @JsonFormat(pattern = "yyyy.MM.dd.HH.mm")
+   @DateTimeFormat(pattern = "yyyy.MM.dd.HH.mm")
+   @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private Date date;
-
     private String username;
-
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private QuestionLevel questionLevel;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
-    public int getAttemptedQuestions() {
-        return attemptedQuestions;
-    }
-
-    public void setAttemptedQuestions(int attemptedQuestions) {
-        this.attemptedQuestions = attemptedQuestions;
-    }
-
-    public QuestionLevel getQuestionLevel() {
-        return questionLevel;
-    }
-
-    public void setQuestionLevel(QuestionLevel questionLevel) {
-        this.questionLevel = questionLevel;
-    }
-
-    public int getScore() {
-        return Score;
-    }
-
-    public void setScore(int score) {
-        Score = score;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getpoint() {
-        return point;
-    }
-
-    public void setpoint(String point) {
-        this.point = point;
-    }
-
-    
 }
+
+

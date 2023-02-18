@@ -1,14 +1,10 @@
 package com.quiz.service.withoutDto.impl;
 
 
-import com.quiz.dto.QuestionDTO;
-import com.quiz.entity.Exam;
-import com.quiz.entity.Question;
 import com.quiz.entity.QuestionLevel;
 import com.quiz.repository.DistributedRepository;
 import com.quiz.repository.QuestionLevelRepository;
 import com.quiz.service.withoutDto.QuestionLevelService;
-import com.quiz.service.withoutDto.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
