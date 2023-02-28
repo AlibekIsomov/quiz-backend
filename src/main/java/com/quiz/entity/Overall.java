@@ -32,8 +32,8 @@ public class Overall extends DistributedEntity {
     private int score;
     private String point;
     private int attemptedQuestions;
-    @JsonFormat(pattern = "yyyy.MM.dd.HH.mm")
-   @DateTimeFormat(pattern = "yyyy.MM.dd.HH.mm")
+    @JsonFormat(pattern = "yyyy.MM.dd")
+   @DateTimeFormat(pattern = "yyyy.MM.dd")
    @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate date;

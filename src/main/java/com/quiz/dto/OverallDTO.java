@@ -8,7 +8,8 @@ import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 import java.util.Date;
 
-public class OverallDTO extends BaseDTO{
+public class OverallDTO {
+    private Long id; 
     private int score;
     private String point;
     private int attemptedQuestions;
@@ -22,6 +23,7 @@ public class OverallDTO extends BaseDTO{
     public OverallDTO() {
     }
     public OverallDTO(Overall overall) {
+        this.id = overall.getId();
         this.score = overall.getScore();
         this.point = overall.getPoint();
         this.attemptedQuestions = overall.getAttemptedQuestions();
@@ -94,5 +96,11 @@ public class OverallDTO extends BaseDTO{
 
     public void setQuestionLevel(QuestionLevel questionLevel) {
         this.questionLevel = questionLevel;
+    }
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 }

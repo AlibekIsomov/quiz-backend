@@ -19,7 +19,7 @@ public class QuestionLevel extends DistributedEntity {
     private String level;
 
     private String info;
-
+    private Long timer;
 
 
 }
