@@ -1,5 +1,6 @@
 package com.quiz.service.withoutDto;
 
+import java.util.List;
 import java.util.Set;
 
 import com.quiz.dto.OverallDTO;
@@ -18,8 +19,6 @@ public interface OverAllService extends CommonService<Overall>{
 
 	public Page<OverallDTO> getAllDTO(Pageable pageable);
 
-	public Page<Overall> getOverallsOfQuestionLevel(Pageable pageable);
 
-	
-
+	List<Overall> getOverallsOfQuestionLevel(Long id);
 }

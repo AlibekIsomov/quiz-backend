@@ -2,7 +2,6 @@ package com.quiz.service.withoutDto.impl;
 
 import com.quiz.dto.OverallDTO;
 import com.quiz.entity.Overall;
-import com.quiz.entity.QuestionLevel;
 import com.quiz.repository.DistributedRepository;
 import com.quiz.repository.OverallRepository;
 import com.quiz.repository.UserRepository;
@@ -11,8 +10,7 @@ import com.quiz.service.withoutDto.OverAllService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,12 +76,10 @@ public class OverallServiceImpl  extends AbstractService<Overall> implements Ove
 	}
 
 	@Override
-	public Page<Overall> getOverallsOfQuestionLevel(Pageable pageable) {
-		Page<Overall> some = overallRepository.findAllByQuestionLevel(pageable);
-		if(some.isEmpty()){
-			return Page.empty();
-		}
-		return some;
+	public List<Overall> getOverallsOfQuestionLevel(Long id) {
+		List<Overall> questionLevelId = overallRepository.findAllByQuestionLevelId(id);
+
+		return questionLevelId;
 	}
 
 

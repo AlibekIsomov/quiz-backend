@@ -26,9 +26,9 @@ public class OverallController extends AbstractController<Overall> {
     public OverallController(CommonService<Overall> service) {
         super(service);
     }
-    @GetMapping("/get/level")
-    public ResponseEntity<?> findAllByQuestionLevel(Pageable pageable){
-        return ResponseEntity.ok(overAllService.getAll(pageable));
+    @GetMapping("/get/questionl")
+    public ResponseEntity<?> getOverallsOfQuestionLevel(@PathVariable Long id){
+        return ResponseEntity.ok(overAllService.getOverallsOfQuestionLevel(id));
     }
 	// get all overalls
 	@GetMapping("/all")

@@ -14,9 +14,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OverallRepository extends DistributedRepository<Overall> {
 
-	public Page<Overall> findAllByQuestionLevel(Pageable pageable);
 
 	public List<Overall> findAllByQuestionLevelId(Long id);
 
 
+//	Page<Overall> findAllByQuestionLevel(Pageable pageable);
 }

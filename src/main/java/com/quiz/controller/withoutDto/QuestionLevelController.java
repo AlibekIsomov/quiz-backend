@@ -21,7 +21,7 @@ public class  QuestionLevelController extends AbstractController<QuestionLevel> 
     QuestionLevelService questionLevelService;
     @Autowired
     OverAllService overAllService;
-    @DeleteMapping("/get/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteQuestionLevel(@PathVariable Long id){
         questionLevelService.deleteQuestionLevel(id);
         return ResponseEntity.badRequest().build();
