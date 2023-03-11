@@ -4,21 +4,19 @@ import com.quiz.entity.Overall;
 import com.quiz.entity.QuestionLevel;
 import com.quiz.entity.User;
 
+import java.util.List;
 import java.util.Set;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OverallRepository extends DistributedRepository<Overall> {
-    // Set<Overall> findByQuestionLevel(QuestionLevel questionLevel);
 
-    // Set<Overall> getOverallByUser(String user);
+	public Page<Overall> findAllByQuestionLevel(Pageable pageable);
 
-    // Set<Overall> getOverallByUsername(String username);
+	public List<Overall> findAllByQuestionLevelId(Long id);
 
-    Set<Overall> findByQuestionLevel(QuestionLevel questionLevel);
-	
-	Set<Overall> getOOverallsByUser(User user);
-	
-	Set<Overall> getOverallsByUsername(String username);
+
 }

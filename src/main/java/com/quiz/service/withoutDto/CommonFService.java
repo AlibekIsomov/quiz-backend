@@ -41,4 +41,5 @@ public interface CommonFService <T> {
      * @return void
      */
     public void deleteById(Long dataId);
+
 }

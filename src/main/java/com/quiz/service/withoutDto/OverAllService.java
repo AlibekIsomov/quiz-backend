@@ -11,17 +11,15 @@ import org.springframework.data.domain.Pageable;
 public interface OverAllService extends CommonService<Overall>{
 
 
-	
-	public Overall updateOverall(Overall overall);
+
 	public Overall addOverallWithUser(Overall overall);
-	public Set<Overall> getOveralls();
+
 	public OverallDTO getOverallDTO(Long id);
 
-
 	public Page<OverallDTO> getAllDTO(Pageable pageable);
+
+	public Page<Overall> getOverallsOfQuestionLevel(Pageable pageable);
+
 	
-	public Set<Overall> getOverallsOfUser(String username);
-	
-	public Set<Overall> getOverallsOfQuestionLevel(QuestionLevel questionLevel);
-	
+
 }

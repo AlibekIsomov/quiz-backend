@@ -1,8 +1,6 @@
 package com.quiz.service.withoutDto.impl;
 
-import com.quiz.Security.JwtTokenUtil;
 import com.quiz.dto.OverallDTO;
-import com.quiz.dto.UserDTO;
 import com.quiz.entity.Overall;
 import com.quiz.entity.QuestionLevel;
 import com.quiz.repository.DistributedRepository;
@@ -16,6 +14,8 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class OverallServiceImpl  extends AbstractService<Overall> implements OverAllService {
-    
+	private static final Logger LOG = LoggerFactory.getLogger(AbstractService.class);
     @Autowired
 	private OverallRepository overallRepository;
 	@Autowired
@@ -54,15 +54,6 @@ public class OverallServiceImpl  extends AbstractService<Overall> implements Ove
 		return overallRepository.save(overall);
 	}
 
-	@Override
-	public Overall updateOverall(Overall overall) {
-		return this.overallRepository.save(overall);
-	}
-
-	@Override
-	public Set<Overall> getOveralls() {
-		return new HashSet<Overall>(this.overallRepository.findAll());
-	}
 
 	@Override
 	public OverallDTO getOverallDTO(Long id) {
@@ -87,13 +78,13 @@ public class OverallServiceImpl  extends AbstractService<Overall> implements Ove
 	}
 
 	@Override
-	public Set<Overall> getOverallsOfUser(String username) {
-		return new HashSet<Overall>(this.overallRepository.getOverallsByUsername(username));
+	public Page<Overall> getOverallsOfQuestionLevel(Pageable pageable) {
+		Page<Overall> some = overallRepository.findAllByQuestionLevel(pageable);
+		if(some.isEmpty()){
+			return Page.empty();
+		}
+		return some;
 	}
 
-	@Override
-	public Set<Overall> getOverallsOfQuestionLevel(QuestionLevel questionLevel) {
-		return new HashSet<>(this.overallRepository.findByQuestionLevel(questionLevel));
-	}
 
 }
