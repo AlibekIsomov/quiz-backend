@@ -25,6 +25,9 @@ public class Question extends DistributedEntity {
     @ManyToOne
     private QuestionLevel questionLevel;
 
+    @ManyToOne
+    private Fayl photo;
+
 
 
 
