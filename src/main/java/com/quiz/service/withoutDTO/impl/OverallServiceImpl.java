@@ -44,31 +44,6 @@ public class OverallServiceImpl  extends AbstractService<Overall> implements Ove
     }
 
 	@Override
-	public Overall addOverallWithUser(Overall overall){
-		overall.setDate(LocalDate.now());
-		overall.setCreated(LocalDateTime.now());
-		overall.setModified(LocalDateTime.now());
-		overall.setUser(userRepository.findByUsername(userServiceImpl.getCurrentUser().getUsername()).get());
-		return overallRepository.save(overall);
-	}
-
-
-	@Override
-	public OverallDTO getOverallDTO(Long id) {
-		Overall overall = overallRepository.findById(id).get();
-		OverallDTO overallDTO = new OverallDTO();
-		overallDTO.setDate(overall.getDate());
-		overallDTO.setAttemptedQuestions(overall.getAttemptedQuestions());
-		overallDTO.setName(overall.getUser().getName());
-		overallDTO.setPoint(overall.getPoint());
-		overallDTO.setScore(overall.getScore());
-		overallDTO.setSurname(overall.getUser().getSurname());
-		overallDTO.setUsername(overall.getUser().getUsername());
-		overallDTO.setQuestionLevel(overall.getQuestionLevel());
-		return overallDTO;
-	}
-
-	@Override
 	public Page<OverallDTO> getAllDTO(Pageable pageable) {
 		Page<Overall> overalls = overallRepository.findAll(pageable);
 		Page<OverallDTO> overallDTOPage = overalls.map(OverallDTO::new);

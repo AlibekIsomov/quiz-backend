@@ -1,7 +1,9 @@
 package com.quiz.controller;
 
-import com.quiz.entity.Fayl;
-import com.quiz.service.withoutDTO.FaylService;
+
+
+import com.quiz.entity.FileEntity;
+import com.quiz.service.withoutDTO.FileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,22 +16,23 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.File;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/fayl")
-public class FaylController {
+public class FileController {
 
-    private Logger logger = LoggerFactory.getLogger(FaylController.class.getName());
+    private Logger logger = LoggerFactory.getLogger(FileController.class.getName());
 
 
     private String ROOT_DIRECTORY = "files";
 
-    private final FaylService faylService;
+    private final FileService fileService;
 
     @Value("${system.root-directory}")
     private void setDirectory(String url) {
@@ -38,28 +41,28 @@ public class FaylController {
     }
 
 
-    public FaylController(FaylService faylService) {
-        this.faylService = faylService;
+    public FileController(FileService faylService) {
+        this.fileService = faylService;
     }
 
 
     @GetMapping()
-    public ResponseEntity<List<Fayl>> getAll(@RequestParam(name = "key", required = false) String key,
-                                             HttpServletRequest req, HttpServletResponse res) {
+    public ResponseEntity<List<FileEntity>> getAll(@RequestParam(name = "key", required = false) String key,
+                                                   HttpServletRequest req, HttpServletResponse res) {
         if (key == null) key = "";
-        return ResponseEntity.ok(faylService.getAll(key));
+        return ResponseEntity.ok(fileService.getAll(key));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Fayl> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(faylService.getById(id));
+    public ResponseEntity<FileEntity> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(fileService.getById(id));
     }
 
     @GetMapping("/download/{id}")
     public ResponseEntity<?> downloadFile(@PathVariable Long id) {
-        Fayl f = faylService.getById(id);
+        FileEntity f = fileService.getById(id);
 
-        File file = new File(ROOT_DIRECTORY + "/" + f.getId() + "_" + f.getNom());
+        java.io.File file = new java.io.File(ROOT_DIRECTORY + "/" + f.getId() + "_" + f.getName());
         if (file.exists()) {
 
             try {
@@ -70,8 +73,8 @@ public class FaylController {
                 headers.add("Expires", "0");
 
                 MediaType mediaType = MediaType.APPLICATION_OCTET_STREAM;
-                if(f.getTur() != null){
-                    mediaType = MediaType.parseMediaType(f.getTur());
+                if(f.getType() != null){
+                    mediaType = MediaType.parseMediaType(f.getType());
                 }
 
                 return ResponseEntity.ok()
@@ -90,28 +93,28 @@ public class FaylController {
 
 
     @PostMapping("/upload")
-    public ResponseEntity<Fayl> upload(@RequestParam("file") MultipartFile file) {
-        Fayl f = new Fayl();
-        f.setNom(file.getOriginalFilename());
-        f.setTur(file.getContentType());
-        f = faylService.create(f);
+    public ResponseEntity<FileEntity> upload(@RequestParam("file") MultipartFile file) {
+        FileEntity f = new FileEntity();
+        f.setName(file.getOriginalFilename());
+        f.setType(file.getContentType());
+        f = fileService.create(f);
         try {
-            File saqlashFayl = new File(ROOT_DIRECTORY);
-            if (!saqlashFayl.exists()) saqlashFayl.mkdirs();
+            java.io.File saveFile = new java.io.File(ROOT_DIRECTORY);
+            if (!saveFile.exists()) saveFile.mkdirs();
 
-            saqlashFayl = new File(ROOT_DIRECTORY + "/" + f.getId() + "_" + f.getNom());
+            saveFile = new File(ROOT_DIRECTORY + "/" + f.getId() + "_" + f.getName());
 
-            saqlashFayl.createNewFile();
+            saveFile.createNewFile();
 
-            FileOutputStream fos = new FileOutputStream(saqlashFayl);
+            FileOutputStream fos = new FileOutputStream(saveFile);
             fos.write(file.getBytes());
             fos.close();
             return ResponseEntity.ok(f);
 
         } catch (IOException e) {
-           logger.error(e.getMessage());
+            logger.error(e.getMessage());
         }
-        faylService.delete(f);
+        fileService.delete(f);
 
         return ResponseEntity.badRequest().build();
     }
@@ -119,7 +122,7 @@ public class FaylController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
-        faylService.deleteById(id);
+        fileService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 

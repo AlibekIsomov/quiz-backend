@@ -48,36 +48,36 @@ public class    SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .addFilterBefore(corsFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-//                .antMatchers("/api/account/authenticate").permitAll()
-//                .antMatchers("/api/account/register").permitAll()
-//                .antMatchers("/api/xa").permitAll()
-//                .antMatchers("/api/question").hasAnyAuthority("ADMIN","MANAGER")
-//                .antMatchers("/api/exam").hasAnyAuthority("ADMIN","MANAGER")
-//                .antMatchers("/api/blog").hasAnyAuthority("ADMIN","MANAGER")
-//                .antMatchers("/api/user").hasAnyAuthority("ADMIN")
-//
-//                .antMatchers("/api/question/all").permitAll()
-//                .antMatchers("/api/question/get/{id}").permitAll()
-//
-//                .antMatchers("/api/questions/all").permitAll()
-//                .antMatchers("/api/questions/get/{id}").permitAll()
-//
-//                .antMatchers("/api/exam/all").permitAll()
-//                .antMatchers("/api/exam/get/{id}").permitAll()
-//
-//                .antMatchers("/api/user/all").authenticated()
-//                .antMatchers("/api/user/get/{id}").authenticated()
-//
-//                .antMatchers("/api/blog/all").permitAll()
-//                .antMatchers("/api/blog/get/{id}").permitAll()
-//
-//                .antMatchers("/api/level/all").permitAll()
-//                .antMatchers("/api/level/get/{id}").permitAll()
-//
-//                .antMatchers("/api/overall/all").permitAll()
-//                .antMatchers("/api/overall/get/{id}").permitAll()
+                .antMatchers("/api/account/authenticate").permitAll()
+                .antMatchers("/api/account/register").permitAll()
+                .antMatchers("/api/xa").permitAll()
+                .antMatchers("/api/question").hasAnyAuthority("ADMIN","MANAGER")
+                .antMatchers("/api/exam").hasAnyAuthority("ADMIN","MANAGER")
+                .antMatchers("/api/blog").hasAnyAuthority("ADMIN","MANAGER")
+                .antMatchers("/api/user").hasAnyAuthority("ADMIN")
 
-                .antMatchers("/**").permitAll()
+                .antMatchers("/api/question/all").permitAll()
+                .antMatchers("/api/question/get/{id}").permitAll()
+
+                .antMatchers("/api/questions/all").permitAll()
+                .antMatchers("/api/questions/get/{id}").permitAll()
+
+                .antMatchers("/api/exam/all").permitAll()
+                .antMatchers("/api/exam/get/{id}").permitAll()
+
+                .antMatchers("/api/user/all").authenticated()
+                .antMatchers("/api/user/get/{id}").authenticated()
+
+                .antMatchers("/api/blog/all").permitAll()
+                .antMatchers("/api/blog/get/{id}").permitAll()
+
+                .antMatchers("/api/level/all").permitAll()
+                .antMatchers("/api/level/get/{id}").permitAll()
+
+                .antMatchers("/api/overall/all").permitAll()
+                .antMatchers("/api/overall/get/{id}").permitAll()
+
+//                .antMatchers("/**").permitAll()
 
                 .antMatchers("/swagger-ui/**").permitAll()
                 .antMatchers("/swagger-ui.html").permitAll()

@@ -18,5 +18,5 @@ public interface OverallRepository extends DistributedRepository<Overall> {
 	public List<Overall> findAllByQuestionLevelId(Long id);
 
 
-//	Page<Overall> findAllByQuestionLevel(Pageable pageable);
+
 }

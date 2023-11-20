@@ -22,11 +22,12 @@ public class Question extends DistributedEntity {
     @NotNull
     private String answer;
 
+    @NotNull
     @ManyToOne
     private QuestionLevel questionLevel;
 
     @ManyToOne
-    private Fayl photo;
+    private FileEntity photo;
 
 
 
