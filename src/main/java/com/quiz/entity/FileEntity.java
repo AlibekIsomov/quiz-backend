@@ -1,6 +1,7 @@
 package com.quiz.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,4 +21,8 @@ public class FileEntity {
     private String name;
 
     private String type;
+
+    @JsonIgnore
+    @OneToOne
+    private Blog inventory;
 }

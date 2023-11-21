@@ -20,17 +20,17 @@ import java.util.Set;
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 @Data
 public class Blog extends DistributedEntity {
-    @NotNull
+//    @NotNull
     @Size(max = 15, min = 1)
     private String name;
-
-    @NotNull
+//
+//    @NotNull
     @Size(max = 100, min = 5)
     private String description;
 
     private String link;
 
-    @ManyToOne
-    private FileEntity photo;
+    @OneToOne
+    private FileEntity fileEntity;
 
 }
