@@ -5,10 +5,10 @@ import com.quiz.dto.QuestionDTO;
 import com.quiz.entity.Question;
 import com.quiz.repository.FileRepository;
 import com.quiz.repository.QuestionRepository;
-import com.quiz.service.withoutDTO.CommonService;
 import com.quiz.service.withoutDTO.QuestionService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/question")
-public class QuestionController extends AbstractControllerCU<Question>   {
+public class QuestionController {
 
     @Autowired
     QuestionService questionService;
@@ -41,36 +41,6 @@ public class QuestionController extends AbstractControllerCU<Question>   {
         }
     }
 
-
-    public QuestionController(CommonService<Question> service) {
-        super(service);
-    }
-    @RequestMapping("/search/{key}")
-    public ResponseEntity<?> search(@PathVariable String key, Pageable pageable) {
-        return ResponseEntity.ok(questionService.search(key, pageable));
-    }
-    @GetMapping("/all")
-    public ResponseEntity<?> getAll(Pageable pageable){
-        if (isBlocked) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("API is blocked");
-        } else {
-            // Process the request
-            return ResponseEntity.ok(questionService.getAll(pageable));
-        }
-
-    }
-
-    @GetMapping("/get/{id}")
-    public ResponseEntity<?> getById(@PathVariable Long id){
-        if (isBlocked) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("API is blocked");
-        } else {
-            // Process the request
-            return ResponseEntity.ok(questionService.getById(id));
-        }
-
-
-    }
     @PostMapping
     public ResponseEntity<Question> create(@RequestBody QuestionDTO data) {
         try {
@@ -105,6 +75,21 @@ public class QuestionController extends AbstractControllerCU<Question>   {
             // Handle other exceptions, e.g., log the error and return an internal server error response
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<Question>> getAll(Pageable pageable) throws Exception {
+        return ResponseEntity.ok(questionService.getAll(pageable));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Question> getById(@PathVariable Long id) throws Exception {
+        return questionService.getById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Long id) {
+        questionService.deleteById(id);
     }
 }
 

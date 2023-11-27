@@ -2,13 +2,14 @@ package com.quiz.controller;
 
 
 import com.quiz.entity.DistributedEntity;
+
 import com.quiz.service.withoutDTO.CommonService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-public abstract class  AbstractController<ENTITY extends DistributedEntity>{
+public abstract class AbstractController<ENTITY extends DistributedEntity>{
     private final CommonService<ENTITY> service;
 
     public AbstractController(CommonService<ENTITY> service) {
@@ -19,7 +20,7 @@ public abstract class  AbstractController<ENTITY extends DistributedEntity>{
     public ResponseEntity<?> getAll(Pageable pageable){
         return ResponseEntity.ok(service.getAll(pageable));
     }
-//    @PostMapping
+    @PostMapping
 
     public ResponseEntity<?> create(@RequestBody ENTITY entity) throws Exception {
         return new ResponseEntity<>(service.create(entity), HttpStatus.CREATED);

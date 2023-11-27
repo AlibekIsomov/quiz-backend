@@ -13,10 +13,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OverallRepository extends DistributedRepository<Overall> {
-
-
 	public List<Overall> findAllByQuestionLevelId(Long id);
-
-
 
 }

@@ -4,9 +4,9 @@ import com.quiz.dto.BlogDTO;
 import com.quiz.entity.Blog;
 import com.quiz.repository.BlogRepository;
 import com.quiz.service.withoutDTO.BlogService;
-import com.quiz.service.withoutDTO.CommonService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,26 +16,13 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/blog")
-public class BlogController extends AbstractControllerCU<Blog>{
-    public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/webapp/imagedata";
+public class BlogController {
+
     @Autowired
     BlogRepository blogRepository;
     @Autowired
     BlogService blogService;
-    public BlogController(CommonService<Blog> service) {
-        super(service);
-    }
 
-    @GetMapping("/all")
-    public ResponseEntity<?> getAll(Pageable pageable){
-        return ResponseEntity.ok(blogService.getAll(pageable));
-    }
-
-    @GetMapping("/get/{id}")
-    public ResponseEntity<?> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(blogService.getById(id));
-
-    }
     @PostMapping
     public ResponseEntity<Blog> create(@RequestBody BlogDTO data) {
         try {
@@ -70,6 +57,21 @@ public class BlogController extends AbstractControllerCU<Blog>{
             // Handle other exceptions, e.g., log the error and return an internal server error response
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<Blog>> getAll(Pageable pageable) throws Exception {
+        return ResponseEntity.ok(blogService.getAll(pageable));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Blog> getById(@PathVariable Long id) throws Exception {
+        return blogService.getById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Long id) {
+        blogService.deleteById(id);
     }
 
 }

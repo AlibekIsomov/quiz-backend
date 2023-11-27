@@ -6,31 +6,39 @@ import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.time.Instant;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 @Data
-public class Question extends DistributedEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class Question{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @NotNull
     private String title;
 
     @NotNull
     private String answer;
 
-    @NotNull
+//    @NotNull
     @ManyToOne
     private QuestionLevel questionLevel;
 
     @OneToOne
     private FileEntity fileEntity;
 
-
+    @CreatedDate
+    private Instant createdAt;
 
 
 }

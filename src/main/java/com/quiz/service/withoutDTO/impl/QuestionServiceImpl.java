@@ -4,7 +4,6 @@ import com.quiz.dto.QuestionDTO;
 import com.quiz.entity.FileEntity;
 import com.quiz.entity.Question;
 import com.quiz.entity.QuestionLevel;
-import com.quiz.repository.DistributedRepository;
 import com.quiz.repository.FileRepository;
 import com.quiz.repository.QuestionLevelRepository;
 import com.quiz.repository.QuestionRepository;
@@ -23,7 +22,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class QuestionServiceImpl extends AbstractService<Question> implements QuestionService {
+public class QuestionServiceImpl implements QuestionService{
     private static final Logger logger = LoggerFactory.getLogger(QuestionServiceImpl.class);
     @Autowired
     QuestionRepository questionRepository;
@@ -33,19 +32,9 @@ public class QuestionServiceImpl extends AbstractService<Question> implements Qu
     @Autowired
     QuestionLevelRepository questionLevelRepository;
 
-    public QuestionServiceImpl(DistributedRepository<Question> repository) {
-        super(repository);
-    }
-
     @Override
-    public Page<Question> search(String key, Pageable pageable) {
-        try{
-            Long n=Long.parseLong(key);
-            return questionRepository.findAllByTitleContainingIgnoreCaseOrQuestionLevel(n,key,key,  pageable);
-        }
-        catch (Exception x) {
-            return questionRepository.findAllByTitleContainingIgnoreCaseOrQuestionLevel((long)-1, key,  key, pageable);
-        }
+    public Page<Question> getAll(Pageable pageable) throws Exception {
+        return questionRepository.findAll(pageable);
     }
 
     @Override
@@ -53,7 +42,7 @@ public class QuestionServiceImpl extends AbstractService<Question> implements Qu
         Optional<QuestionLevel> optionalQuestionLevel = questionLevelRepository.findById(data.getQuestionLevelId());
         Optional<FileEntity> optionalFileEntity = fileRepository.findById(data.getFileEntityId());
         if (!optionalFileEntity.isPresent()) {
-            logger.info("Such ID category does not exist!");
+            logger.info("Such ID File does not exist!");
         }
 
         Question question = new Question();
@@ -76,9 +65,6 @@ public class QuestionServiceImpl extends AbstractService<Question> implements Qu
         }
         Question question = exsitingQuestion.get();
 
-
-
-
         question.setTitle(question.getTitle());
         question.setAnswer(question.getAnswer());
         question.setQuestionLevel(optionalQuestionLevel.get());
@@ -86,16 +72,25 @@ public class QuestionServiceImpl extends AbstractService<Question> implements Qu
 
         return Optional.of(questionRepository.save(question));
     }
-    @Override
-    public void someChangesForCreate(Question entity) {
-
-    }
 
     @Override
-    public void someChangesForUpdate(Question entity) {
-
+    public Optional<Question> getById(Long id) throws Exception {
+        if (!questionRepository.existsById(id)) {
+            logger.error("Question with id " + id + " does not exists");
+            return null;
+        }
+        return questionRepository.findById(id);
     }
 
+
+    @Override
+    public void deleteById(Long id) {
+        if (!questionRepository.existsById(id)) {
+            logger.error("Question with id " + id + " does not exists");
+        }
+        questionRepository.deleteById(id);
+
+    }
 
 }
 

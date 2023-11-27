@@ -9,11 +9,15 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 
-public interface QuestionService extends CommonService<Question>{
+public interface QuestionService {
 
-     Page<Question> search(String key, Pageable pageable);
+    Page<Question> getAll(Pageable pageable) throws Exception;
 
     Optional<Question> create(QuestionDTO data) throws Exception;
 
     Optional<Question> update(Long id, QuestionDTO data) throws Exception;
+
+    Optional<Question> getById(Long id) throws Exception;
+
+    void deleteById(Long id);
 }

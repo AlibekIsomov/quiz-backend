@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class QuestionDTO extends BaseDTO {
     private Long id;
     private String title;
+    private String answer;
     private Long questionLevelId;
     private Long fileEntityId;
 

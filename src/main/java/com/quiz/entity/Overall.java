@@ -12,23 +12,26 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 @Data
-public class Overall extends DistributedEntity {
+@EntityListeners(AuditingEntityListener.class)
+public class Overall extends DistributedEntity{
+
     private int score;
 
     private String point;
@@ -48,6 +51,9 @@ public class Overall extends DistributedEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
+
+    @CreatedDate
+    private Instant createdAt;
 
 }
 

@@ -1,7 +1,9 @@
 package com.quiz.service.withoutDTO.impl;
 
 
+import com.quiz.dto.OverallDTO;
 import com.quiz.entity.DistributedEntity;
+import com.quiz.entity.Overall;
 import com.quiz.repository.DistributedRepository;
 import com.quiz.service.withoutDTO.CommonService;
 import org.slf4j.Logger;
@@ -10,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public abstract class AbstractService<ENTITY extends DistributedEntity> implements CommonService<ENTITY> {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractService.class);
@@ -89,4 +92,12 @@ public abstract class AbstractService<ENTITY extends DistributedEntity> implemen
         }
 
     }
+
+    public abstract Overall addOverallWithUser(Overall overall);
+
+    public abstract OverallDTO getOverallDTO(Long id);
+
+    public abstract Page<OverallDTO> getAllDTO(Pageable pageable);
+
+    public abstract List<Overall> getOverallsOfQuestionLevel(Long id);
 }
