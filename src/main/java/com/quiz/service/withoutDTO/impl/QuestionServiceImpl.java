@@ -16,12 +16,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
 
 
 @Service
-@Transactional
 public class QuestionServiceImpl implements QuestionService{
     private static final Logger logger = LoggerFactory.getLogger(QuestionServiceImpl.class);
     @Autowired
@@ -46,8 +44,8 @@ public class QuestionServiceImpl implements QuestionService{
         }
 
         Question question = new Question();
-        question.setTitle(question.getTitle());
-        question.setAnswer(question.getAnswer());
+        question.setTitle(data.getTitle());
+        question.setAnswer(data.getAnswer());
         question.setQuestionLevel(optionalQuestionLevel.get());
         question.setFileEntity(optionalFileEntity.get());
 

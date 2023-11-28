@@ -29,7 +29,7 @@ public class BlogServiceImpl implements BlogService {
 
         Optional<FileEntity> optionalFileEntity = fileRepository.findById(data.getFileEntityId());
         if (!optionalFileEntity.isPresent()) {
-            logger.info("Such ID category does not exist!");
+            logger.info("Such ID File does not exist!");
         }
 
         Blog blog = new Blog();
@@ -46,7 +46,7 @@ public class BlogServiceImpl implements BlogService {
         Optional<Blog> exsitingblog = blogRepository.findById(id);
         Optional<FileEntity> optionalFileEntity = fileRepository.findById(data.getFileEntityId());
         if (!exsitingblog.isPresent()) {
-            logger.info("Inventory with id " + id + " does not exist");
+            logger.info("Blog with id " + id + " does not exist");
             return null;
         }
         Blog blog = exsitingblog.get();
@@ -78,7 +78,7 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public void deleteById(Long id) {
         if (!blogRepository.existsById(id)) {
-            logger.error("Question level with id " + id + " does not exists");
+            logger.error("Blog level with id " + id + " does not exists");
         }
 
         blogRepository.deleteById(id);

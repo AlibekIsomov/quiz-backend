@@ -23,8 +23,8 @@ public abstract class DistributedEntity {
 //    @DateTimeFormat(pattern = "yyyy.MM.dd.HH.mm")
 //    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
 //    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    private LocalDateTime modified;
-    private LocalDateTime created;
+//    private LocalDateTime modified;
+//    private LocalDateTime created;
 
     public DistributedEntity() {
     }
@@ -37,21 +37,21 @@ public abstract class DistributedEntity {
         this.id = id;
     }
 
-    public LocalDateTime getModified() {
-        return modified;
-    }
-
-    public void setModified(LocalDateTime modified) {
-        this.modified = modified;
-    }
-
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
-    }
+//    public LocalDateTime getModified() {
+//        return modified;
+//    }
+//
+//    public void setModified(LocalDateTime modified) {
+//        this.modified = modified;
+//    }
+//
+//    public LocalDateTime getCreated() {
+//        return created;
+//    }
+//
+//    public void setCreated(LocalDateTime created) {
+//        this.created = created;
+//    }
 
     public boolean isNewEntity() {
         return this.id == null;

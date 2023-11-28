@@ -1,7 +1,5 @@
 package com.quiz.dto;
 
-
-import com.quiz.dto.BaseDTO;
 import com.quiz.entity.Question;
 import com.quiz.entity.Role;
 import com.quiz.entity.User;

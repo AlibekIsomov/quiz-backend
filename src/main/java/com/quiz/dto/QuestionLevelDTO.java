@@ -9,11 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class QuestionLevelDTO {
 
-    private Long id;
-
     private String level;
 
     private String info;
 
-    private Long timer;
+    private Integer timer;
 }

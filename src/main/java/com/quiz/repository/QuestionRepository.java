@@ -12,6 +12,5 @@ import java.util.List;
 
 @Repository
 public interface QuestionRepository extends DistributedRepository<Question> {
-    public Page<Question> findAllByTitleContainingIgnoreCaseOrQuestionLevel(Long id ,String Title, String QuestionLevel, Pageable pageable );
-    public List<Question> findAllByQuestionLevelId(Long id);
+
 }

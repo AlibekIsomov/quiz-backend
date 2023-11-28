@@ -38,9 +38,9 @@ public class QuestionLevelServiceImpl  implements QuestionLevelService {
     public Optional<QuestionLevel> create(QuestionLevelDTO data) throws Exception {
 
         QuestionLevel questionLevel = new QuestionLevel();
-        questionLevel.setLevel(questionLevel.getLevel());
-        questionLevel.setTimer(questionLevel.getTimer());
-        questionLevel.setInfo(questionLevel.getInfo());
+        questionLevel.setLevel(data.getLevel());
+        questionLevel.setTimer(data.getTimer());
+        questionLevel.setInfo(data.getInfo());
 
         return Optional.of(questionLevelRepository.save(questionLevel));
     }

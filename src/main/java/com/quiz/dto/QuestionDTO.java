@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class QuestionDTO extends BaseDTO {
-    private Long id;
+public class QuestionDTO  {
     private String title;
+
     private String answer;
+
     private Long questionLevelId;
+
     private Long fileEntityId;
-
-
 }

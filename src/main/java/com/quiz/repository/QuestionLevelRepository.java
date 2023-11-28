@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface QuestionLevelRepository extends DistributedRepository<QuestionLevel> {
 
-    Page<QuestionLevel> findAllByLevelContainingIgnoreCase(Long id, String key, Pageable pageable);
+
 }
