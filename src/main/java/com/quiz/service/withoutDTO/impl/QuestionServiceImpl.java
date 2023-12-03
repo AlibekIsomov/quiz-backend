@@ -39,8 +39,8 @@ public class QuestionServiceImpl implements QuestionService{
     public Optional<Question> create(QuestionDTO data) throws Exception {
         Optional<QuestionLevel> optionalQuestionLevel = questionLevelRepository.findById(data.getQuestionLevelId());
         Optional<FileEntity> optionalFileEntity = fileRepository.findById(data.getFileEntityId());
-        if (!optionalFileEntity.isPresent()) {
-            logger.info("Such ID File does not exist!");
+        if (!optionalQuestionLevel.isPresent()) {
+            logger.info("Level with id  does not exist");
         }
 
         Question question = new Question();
