@@ -18,7 +18,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Builder
+
 @EntityListeners(AuditingEntityListener.class)
 public class QuestionLevel {
     @Id
