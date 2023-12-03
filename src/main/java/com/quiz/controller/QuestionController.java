@@ -46,7 +46,7 @@ public class QuestionController {
         try {
             Optional<Question> question = questionService.create(data);
 
-            if(question.isPresent()){
+            if  (question.isPresent()){
                 return ResponseEntity.ok(question.get());
             }
             else {

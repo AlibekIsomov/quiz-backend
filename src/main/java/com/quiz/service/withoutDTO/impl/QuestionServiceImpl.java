@@ -38,16 +38,16 @@ public class QuestionServiceImpl implements QuestionService{
     @Override
     public Optional<Question> create(QuestionDTO data) throws Exception {
         Optional<QuestionLevel> optionalQuestionLevel = questionLevelRepository.findById(data.getQuestionLevelId());
-        Optional<FileEntity> optionalFileEntity = fileRepository.findById(data.getFileEntityId());
         if (!optionalQuestionLevel.isPresent()) {
-            logger.info("Level with id  does not exist");
+            logger.error("Level with id  does not exist");
         }
+        FileEntity fileEntity = fileRepository.findById(data.getFileEntityId()).orElse(null);
 
         Question question = new Question();
         question.setTitle(data.getTitle());
         question.setAnswer(data.getAnswer());
         question.setQuestionLevel(optionalQuestionLevel.get());
-        question.setFileEntity(optionalFileEntity.get());
+        question.setFileEntity(fileEntity);
 
         return Optional.of(questionRepository.save(question));
     }
@@ -58,7 +58,7 @@ public class QuestionServiceImpl implements QuestionService{
         Optional<Question> exsitingQuestion = questionRepository.findById(id);
         Optional<FileEntity> optionalFileEntity = fileRepository.findById(data.getFileEntityId());
         if (!exsitingQuestion.isPresent()) {
-            logger.info("Inventory with id " + id + " does not exist");
+            logger.error("Inventory with id " + id + " does not exist");
             return null;
         }
         Question question = exsitingQuestion.get();
