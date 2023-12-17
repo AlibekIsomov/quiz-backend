@@ -56,7 +56,7 @@ public class QuestionServiceImpl implements QuestionService{
     public Optional<Question> update(Long id, QuestionDTO data) throws Exception {
         Optional<QuestionLevel> optionalQuestionLevel = questionLevelRepository.findById(data.getQuestionLevelId());
         Optional<Question> exsitingQuestion = questionRepository.findById(id);
-        Optional<FileEntity> optionalFileEntity = fileRepository.findById(data.getFileEntityId());
+        FileEntity fileEntity = fileRepository.findById(data.getFileEntityId()).orElse(null);
         if (!exsitingQuestion.isPresent()) {
             logger.error("Inventory with id " + id + " does not exist");
             return null;
@@ -66,7 +66,7 @@ public class QuestionServiceImpl implements QuestionService{
         question.setTitle(question.getTitle());
         question.setAnswer(question.getAnswer());
         question.setQuestionLevel(optionalQuestionLevel.get());
-        question.setFileEntity(optionalFileEntity.get());
+        question.setFileEntity(fileEntity);
 
         return Optional.of(questionRepository.save(question));
     }

@@ -41,6 +41,16 @@ public class QuestionController {
         }
     }
 
+    @GetMapping("/block")
+    public ResponseEntity<String> checkBlockedStatus() {
+        if (isBlocked) {
+            return ResponseEntity.ok("API Blocked");
+        } else {
+            return ResponseEntity.ok("API Unblocked");
+        }
+    }
+
+
     @PostMapping
     public ResponseEntity<Question> create(@RequestBody QuestionDTO data) {
         try {
