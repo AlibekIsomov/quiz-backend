@@ -63,8 +63,8 @@ public class QuestionServiceImpl implements QuestionService{
         }
         Question question = exsitingQuestion.get();
 
-        question.setTitle(question.getTitle());
-        question.setAnswer(question.getAnswer());
+        question.setTitle(data.getTitle());
+        question.setAnswer(data.getAnswer());
         question.setQuestionLevel(optionalQuestionLevel.get());
         question.setFileEntity(fileEntity);
 
