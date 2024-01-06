@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Optional;
 
@@ -70,6 +72,11 @@ public class QuestionController {
     @PutMapping("/{id}")
     public ResponseEntity<Question> update(@PathVariable Long id,
                                        @RequestBody QuestionDTO data) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (isBlocked && !isAdmin(authentication)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null); // 403 Forbidden
+        }
         try {
             Optional<Question> updatedInventory = questionService.update(id, data);
 
@@ -100,6 +107,11 @@ public class QuestionController {
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         questionService.deleteById(id);
+    }
+
+    private boolean isAdmin(Authentication authentication) {
+        return authentication.getAuthorities().stream()
+                .anyMatch(authority -> authority.getAuthority().equals("ADMIN"));
     }
 }
 

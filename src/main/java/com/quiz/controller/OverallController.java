@@ -8,14 +8,11 @@ import com.quiz.service.withoutDTO.OverAllService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("api/overall")
+@RequestMapping("/api/overall")
 public class OverallController extends AbstractController<Overall> {
 
     @Autowired
@@ -33,6 +30,23 @@ public class OverallController extends AbstractController<Overall> {
     @GetMapping("/all")
     public ResponseEntity<?> getAll(Pageable pageable){
         return ResponseEntity.ok(overAllService.getAllDTO(pageable));
+    }
+
+    // add overall
+    @PostMapping("/save")
+    public ResponseEntity<Overall> add(@RequestBody Overall overall){
+        return ResponseEntity.ok(this.overAllService.addOverallWithUser(overall));
+    }
+
+    // update overall
+    @PutMapping("/")
+    public ResponseEntity<Overall> update(@RequestBody Overall overall){
+        return ResponseEntity.ok(this.overAllService.updateOverall(overall));
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(overAllService.getById(id));
     }
 
 

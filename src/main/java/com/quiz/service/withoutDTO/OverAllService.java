@@ -17,4 +17,6 @@ public interface OverAllService extends CommonService<Overall> {
 
 
 	List<Overall> getOverallsOfQuestionLevel(Long id);
+
+	Overall updateOverall(Overall overall);
 }

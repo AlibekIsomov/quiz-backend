@@ -82,5 +82,10 @@ public class OverallServiceImpl  extends AbstractService<Overall> implements Ove
 		return questionLevelId;
 	}
 
+	@Override
+	public Overall updateOverall(Overall overall) {
+		return this.overallRepository.save(overall);
+	}
+
 
 }
