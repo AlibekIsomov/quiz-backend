@@ -45,17 +45,42 @@ public class BlogServiceImpl implements BlogService {
     public Optional<Blog> update(Long id, BlogDTO data) throws Exception {
         Optional<Blog> exsitingblog = blogRepository.findById(id);
         Optional<FileEntity> optionalFileEntity = fileRepository.findById(data.getFileEntityId());
+
+
         if (!exsitingblog.isPresent()) {
             logger.info("Blog with id " + id + " does not exist");
             return null;
         }
+
         Blog blog = exsitingblog.get();
 
+        FileEntity oldFileEntity = blog.getFileEntity();
+
+        // Check if fileId is provided before removing the FileEntity
+        if (data.getFileEntityId() != null) {
+            Optional<FileEntity> newFileEntityOptional = fileRepository.findById(data.getFileEntityId());
+
+            if (!newFileEntityOptional.isPresent()) {
+                logger.info("FileEntity with id " + data.getFileEntityId() + " does not exist");
+                return Optional.empty();
+            }
+
+            // Set the new FileEntity
+            FileEntity newFileEntity = newFileEntityOptional.get();
+            blog.setFileEntity(newFileEntity);
+        } else {
+            // If fileId is not provided, remove the old FileEntity
+            if (oldFileEntity != null) {
+                // Delete the old FileEntity from the repository
+                fileRepository.delete(oldFileEntity);
+                // Remove the old FileEntity from the Store
+                blog.setFileEntity(null);
+            }
+        }
 
         blog.setName(data.getName());
         blog.setLink(data.getLink());
         blog.setDescription(data.getDescription());
-        blog.setFileEntity(optionalFileEntity.get());
 
 
         return Optional.of(blogRepository.save(blog));

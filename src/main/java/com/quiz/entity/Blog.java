@@ -24,7 +24,7 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-        @Size(max = 15, min = 1)
+    @Size(max = 15, min = 1)
     private String name;
 
     @Size(max = 100, min = 5)
@@ -32,7 +32,8 @@ public class Blog {
 
     private String link;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "file_entity_id")
     private FileEntity fileEntity;
 
     @CreatedDate
