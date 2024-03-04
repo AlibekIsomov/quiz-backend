@@ -133,6 +133,7 @@ public class    SecurityConfig extends WebSecurityConfigurerAdapter {
         config.addAllowedOrigin("http://159.65.116.253:5200");
         config.addAllowedOrigin("https://edu-mutaallim.uz");
         config.addAllowedOrigin("http://64.226.120.239");
+        config.addAllowedOrigin("https://swagger.edu-mutaallim.uz");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
