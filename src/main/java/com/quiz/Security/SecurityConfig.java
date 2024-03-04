@@ -131,6 +131,7 @@ public class    SecurityConfig extends WebSecurityConfigurerAdapter {
         config.addAllowedOrigin("http://localhost:5501");
         config.addAllowedOrigin("http://localhost:5502");
         config.addAllowedOrigin("http://159.65.116.253:5200");
+        config.addAllowedOrigin("https://edu-mutaallim.uz");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
